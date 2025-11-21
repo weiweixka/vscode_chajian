@@ -1,0 +1,90 @@
+name: Build and Pack Conda Environments
+
+on:
+  push:
+    branches: [ pack_env ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os_config:
+          # Standard x64 runners
+          - { os: ubuntu-latest,  pack_name: "linux-x64",    archive_ext: "tar.gz" }
+          - { os: windows-latest, pack_name: "win-x64",      archive_ext: "zip" }
+          - { os: macos-13,       pack_name: "macos-x86_64", archive_ext: "tar.gz" }
+          - { os: macos-latest,   pack_name: "macos-arm64",  archive_ext: "tar.gz" }
+          # ARM runners
+          - { os: linux-arm64-runner,  pack_name: "linux-arm64", archive_ext: "tar.gz" }
+          # - { os: windows-arm64-runner, pack_name: "win-arm64",      archive_ext: "zip" }
+
+    runs-on: ${{ matrix.os_config.os }}
+
+    env:
+      CONDA_ENV_NAME: codegeex-agent
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Conda Environment
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          activate-environment: ${{ env.CONDA_ENV_NAME }}
+          environment-file: ./venv/env.yml
+          # THIS IS THE KEY CHANGE:
+          # Only set 'miniforge-variant' for non-Windows ARM runners.
+          # For Windows ARM, this input is omitted, so it defaults to official Miniconda.
+          miniforge-variant: ${{ matrix.os_config.os != 'windows-arm64-runner' && 'Miniforge3' || '' }}
+          # Use 'miniconda-version' for the Win ARM runner, and 'miniforge-version' for others.
+          miniconda-version: ${{ matrix.os_config.os == 'windows-arm64-runner' && 'latest' || '' }}
+          miniforge-version: ${{ matrix.os_config.os != 'windows-arm64-runner' && 'latest' || '' }}
+          use-mamba: true
+          auto-activate-base: false
+          auto-update-conda: false
+          remove-profiles: true
+          conda-solver: libmamba
+          clean-patched-environment-file: true
+          run-post: true
+
+      - name: Install local package with pip
+        shell: bash -l {0}
+        run: |
+          echo "--- Installing local package with pip ---"
+          pwd
+          echo "--- Checking if package path exists ---"
+          ls -la ./dist/agent/mcp_tools/codegeex_mcp_tools/
+          echo "--- Installing with verbose output ---"
+          conda run -n ${{ env.CONDA_ENV_NAME }} pip install ./dist/agent/mcp_tools/codegeex_mcp_tools --verbose --disable-pip-version-check --no-cache-dir
+
+      - name: Verify Installation
+        shell: bash -l {0}
+        run: |
+          echo "--- Verifying conda-pack was installed with the environment ---"
+          conda run -n ${{ env.CONDA_ENV_NAME }} python -c "import conda_pack; print(conda_pack.__version__)"
+          echo "--- Verification Succeeded ---"
+      
+      - name: Pack Environment (Linux & macOS)
+        if: runner.os != 'Windows'
+        shell: bash -l {0}
+        run: |
+          echo "--- Packing environment for Linux/macOS ---"
+          PACK_NAME="${{ env.CONDA_ENV_NAME }}-${{ matrix.os_config.pack_name }}"
+          conda run -n ${{ env.CONDA_ENV_NAME }} conda-pack -n ${{ env.CONDA_ENV_NAME }} -o "${PACK_NAME}.tar.gz" --force
+
+      - name: Pack Environment (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          echo "--- Packing environment for Windows ---"
+          $env:PACK_NAME="${{ env.CONDA_ENV_NAME }}-${{ matrix.os_config.pack_name }}"
+          conda run -n ${{ env.CONDA_ENV_NAME }} conda-pack -n ${{ env.CONDA_ENV_NAME }} -o "$($env:PACK_NAME).zip" --force
+          echo "--- Packing complete ---"
+
+      - name: Upload packed environment
+        uses: actions/upload-artifact@v4
+        with:
+          name: packed-environment-${{ matrix.os_config.pack_name }}
+          path: ${{ env.CONDA_ENV_NAME }}-${{ matrix.os_config.pack_name }}.${{ matrix.os_config.archive_ext }}

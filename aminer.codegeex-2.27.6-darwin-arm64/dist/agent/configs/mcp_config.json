@@ -1,0 +1,25 @@
+{
+  "mcpServers": {
+    "frontend_server": {
+      "command": "python",
+      "args": [
+        "-m",
+        "codegeex_mcp_tools.frontend"
+      ]
+    },
+    "backend_server": {
+      "command": "python",
+      "args": [
+        "-m",
+        "codegeex_mcp_tools.backend"
+      ]
+    },
+    "terminal": {
+      "command": "python",
+      "args": [
+        "-m",
+        "codegeex_mcp_tools.terminal"
+      ]
+    }
+  }
+}

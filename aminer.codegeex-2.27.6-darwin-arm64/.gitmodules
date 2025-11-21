@@ -1,0 +1,12 @@
+[submodule "webview-ui"]
+	path = webview-ui
+	url = https://dev.aminer.cn/codegeex/codegeex-extension-siderbar.git
+[submodule "welcome-page"]
+	path = welcome-page
+	url = https://dev.aminer.cn/codegeex/codegeex-extension-welcome.git
+[submodule "project-map"]
+	path = project-map
+	url = https://dev.aminer.cn/codegeex/project-map.git
+[submodule "agent"]
+	path = agent
+	url = https://dev.aminer.cn/codegeex/codegeex-mcp.git

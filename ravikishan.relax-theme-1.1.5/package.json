@@ -1,0 +1,58 @@
+{
+	"name": "relax-theme",
+	"displayName": "Relax Theme",
+	"description": "A calm, dark-themed Visual Studio Code theme designed for comfort and clarity.",
+	"version": "1.1.5",
+	"publisher": "RaviKishan",
+	"author": {
+		"name": "Ravi Kishan",
+		"email": "ravikishan63392@gmail.com",
+		"url": "https://www.ravikishan.me"
+	},
+	"icon": "/icons/logo_main.jpg",
+	"engines": {
+		"vscode": "^1.94.0"
+	},
+	"categories": [
+		"Themes"
+	],
+	"pricing": "Free",
+	"keywords": [
+		"vscode",
+		"theme",
+		"relax",
+		"dark theme",
+		"developer",
+		"colorful",
+		"syntax highlighting",
+		"calm",
+		"minimalistic",
+		"comfortable coding",
+		"dark mode",
+		"accessibility",
+		"eye-friendly"
+	],
+	"contributes": {
+		"themes": [
+			{
+				"label": "Relax Theme",
+				"uiTheme": "vs-dark",
+				"path": "./themes/Relax Theme-color-theme.json"
+			}
+		]
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Ravikisha/Relax-Vscode-Theme"
+	},
+	"bugs": {
+		"url": "https://github.com/Ravikisha/Relax-Vscode-Theme/issues"
+	},
+	"homepage": "https://github.com/Ravikisha/Relax-Vscode-Theme",
+	"license": "MIT",
+	"__metadata": {
+		"installedTimestamp": 1763711508463,
+		"targetPlatform": "undefined",
+		"size": 189381
+	}
+}

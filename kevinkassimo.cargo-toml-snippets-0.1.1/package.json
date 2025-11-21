@@ -1,0 +1,39 @@
+{
+	"name": "cargo-toml-snippets",
+	"displayName": "Cargo.toml Snippets",
+	"description": "Snippets for Cargo.toml",
+	"icon": "images/icon.png",
+	"version": "0.1.1",
+	"publisher": "kevinkassimo",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/kevinkassimo/cargo-toml-snippets"
+	},
+	"license": "MIT",
+	"engines": {
+		"vscode": "^0.10.5"
+	},
+	"categories": [
+		"Snippets"
+	],
+	"contributes": {
+		"snippets": [
+			{
+				"language": "toml",
+				"path": "./snippets/cargo-toml.json"
+			}
+		]
+	},
+	"scripts": {
+		"lint": "eslint . --ext .json"
+	},
+	"devDependencies": {
+		"eslint": "^6.2.2",
+		"eslint-plugin-json": "^1.4.0"
+	},
+	"__metadata": {
+		"installedTimestamp": 1763710522088,
+		"targetPlatform": "undefined",
+		"size": 19873826
+	}
+}

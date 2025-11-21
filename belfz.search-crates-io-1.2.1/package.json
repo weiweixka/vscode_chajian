@@ -1,0 +1,66 @@
+{
+	"name": "search-crates-io",
+	"displayName": "Search crates.io",
+	"description": "crates suggestions for your Rust project's Cargo.toml file",
+	"keywords": [
+		"rust",
+		"cargo",
+		"crate",
+		"crates",
+		"crates.io"
+	],
+	"license": "MIT",
+	"version": "1.2.1",
+	"author": {
+		"name": "Marcin Baraniecki (belfz)",
+		"email": "marcinbar1@gmail.com"
+	},
+	"publisher": "belfz",
+	"homepage": "https://github.com/belfz/search-crates-io/blob/master/README.md",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/belfz/search-crates-io.git"
+	},
+	"bugs": {
+		"url": "https://github.com/belfz/search-crates-io/issues"
+	},
+	"icon": "images/logo.png",
+	"engines": {
+		"vscode": "^1.20.0"
+	},
+	"categories": [
+		"Languages",
+		"Other"
+	],
+	"activationEvents": [
+		"workspaceContains:Cargo.toml"
+	],
+	"main": "./out/extension",
+	"contributes": {},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"postinstall": "node ./node_modules/vscode/bin/install",
+		"test": "npm run compile && node ./node_modules/vscode/bin/test"
+	},
+	"devDependencies": {
+		"@types/lodash.droprightwhile": "^4.6.3",
+		"@types/lodash.range": "^3.2.3",
+		"@types/mocha": "^2.2.42",
+		"@types/node": "^7.0.43",
+		"tslint": "^5.8.0",
+		"typescript": "^2.6.1",
+		"vscode": "^1.1.6"
+	},
+	"dependencies": {
+		"axios": "^0.18.0",
+		"lodash.droprightwhile": "^4.6.0",
+		"lodash.range": "^3.2.0"
+	},
+	"__metadata": {
+		"installedTimestamp": 1763709908477,
+		"targetPlatform": "undefined",
+		"size": 715063
+	}
+}

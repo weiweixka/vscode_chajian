@@ -1,0 +1,1161 @@
+{
+	"publisher": "AMiner",
+	"name": "codegeex",
+	"displayName": "CodeGeeX: AI Coding Assistant",
+	"description": "CodeGeeX is an AI-based coding assistant, which can suggest code in the current or following lines.  It is powered by a large-scale multilingual code generation model with 13 billion parameters, pretrained on a large code corpus of more than 20 programming languages.",
+	"homepage": "https://codegeex.ai",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/THUDM/CodeGeeX4"
+	},
+	"icon": "./media/codegeex_logo.png",
+	"version": "2.27.6",
+	"engines": {
+		"vscode": "^1.81.0"
+	},
+	"categories": [
+		"Programming Languages",
+		"Snippets",
+		"Machine Learning",
+		"Other"
+	],
+	"keywords": [
+		"codegeex",
+		"python",
+		"go",
+		"java",
+		"javascript",
+		"c++",
+		"c#",
+		"php",
+		"typescript",
+		"ai",
+		"autocomplete",
+		"inline completion",
+		"code explanation",
+		"code generation",
+		"chat",
+		"agent",
+		"chatglm",
+		"glm",
+		"zhipu",
+		"zhipu ai",
+		"智谱AI",
+		"智谱"
+	],
+	"activationEvents": [
+		"*"
+	],
+	"main": "./dist/extension.js",
+	"l10n": "./l10n",
+	"contributes": {
+		"commands": [
+			{
+				"command": "codegeex.login",
+				"title": "%codegeex.login.title%"
+			},
+			{
+				"command": "codegeex.disable-enable",
+				"title": "%codegeex.disable-enable.title%"
+			},
+			{
+				"command": "codegeex.chat.focus",
+				"title": "%codegeex.chat.focus%"
+			},
+			{
+				"command": "codegeex.review",
+				"title": "%codegeex.review.title%",
+				"icon": "$(codegeex-dark)",
+				"enablement": "codegeex.canReview"
+			},
+			{
+				"command": "codegeex.ask",
+				"title": "%codegeex.ask.title%",
+				"enablement": "!commentIsEmpty"
+			},
+			{
+				"command": "codegeex.gotoChat",
+				"title": "Go to Chat"
+			},
+			{
+				"command": "codegeex.askcodegeex.tests",
+				"title": "%codegeex.askcodegeex.tests.title%"
+			},
+			{
+				"command": "codegeex.askcodegeex",
+				"title": "%codegeex.askcodegeex.title%"
+			},
+			{
+				"command": "codegeex.askcodegeex.chat",
+				"title": "%codegeex.askcodegeex.title%"
+			},
+			{
+				"command": "codegeex.askcodegeex.explain",
+				"title": "%codegeex.askcodegeex.explain.title%"
+			},
+			{
+				"command": "codegeex.askcodegeex.comment",
+				"title": "%codegeex.askcodegeex.comment.title%"
+			},
+			{
+				"command": "codegeex.askcodegeex.comment.chat",
+				"title": "%codegeex.askcodegeex.comment.title%"
+			},
+			{
+				"command": "codegeex.askcodegeex.fix.chat",
+				"title": "%codegeex.askcodegeex.fix.title%"
+			},
+			{
+				"command": "codegeex.commit.message",
+				"title": "%codegeex.git.commit.title%",
+				"icon": "$(codegeex-dark)",
+				"enablement": "codegeex.commit.enable"
+			},
+			{
+				"command": "codegeex.toolbar.add",
+				"title": "%codegeex.toolbar.add%",
+				"icon": "$(add)"
+			},
+			{
+				"command": "codegeex.toolbar.history",
+				"title": "%codegeex.toolbar.history%",
+				"icon": "$(history)",
+				"enablement": "!codegeex.enableLocalMode && (codegeex.navTab === 'chat' || codegeex.navTab === 'agent')"
+			},
+			{
+				"command": "codegeex.toolbar.delete",
+				"title": "%codegeex.toolbar.delete%",
+				"icon": "$(clear-all)"
+			},
+			{
+				"command": "codegeex.toolbar.split",
+				"title": "%codegeex.toolbar.split%",
+				"icon": "$(split-horizontal)"
+			},
+			{
+				"command": "codegeex.toolbar.more.newTab",
+				"title": "%codegeex.toolbar.more.newTab%"
+			},
+			{
+				"command": "codegeex.toolbar.more.toolbox",
+				"title": "%codegeex.toolbar.more.toolbox%"
+			},
+			{
+				"command": "codegeex.toolbar.more.settings",
+				"title": "%codegeex.toolbar.more.settings%"
+			},
+			{
+				"command": "codegeex.toolbar.more.help",
+				"title": "%codegeex.toolbar.more.help%"
+			},
+			{
+				"command": "codegeex.toolbar.more.feedback",
+				"title": "%codegeex.toolbar.more.feedback%"
+			},
+			{
+				"command": "codegeex.toolbar.more.localMode",
+				"title": "%codegeex.toolbar.more.localMode%"
+			},
+			{
+				"command": "codegeex.toolbar.more.onlineMode",
+				"title": "%codegeex.toolbar.more.onlineMode%"
+			},
+			{
+				"command": "codegeex.setSeed",
+				"title": "CodeGeeX: Set Seed for Test",
+				"enablement": "codegeex.isDevMode"
+			},
+			{
+				"command": "codegeex.terminal.ask",
+				"icon": "$(codegeex-dark)",
+				"title": "%codegeex.terminal.ask.title%"
+			},
+			{
+				"command": "codegeex.askcodegeex.scanCode",
+				"title": "%codegeex.scanCode%"
+			},
+			{
+				"command": "codegeex.WelcomeGuide.show",
+				"title": "Welcome"
+			},
+			{
+				"command": "codegeex.ghostComment",
+				"title": "%codegeex.ghostComment.title%"
+			},
+			{
+				"command": "codegeex.ghostComment.hide",
+				"title": "%codegeex.ghostComment.hide.title%"
+			},
+			{
+				"command": "codegeex.explorer.projectMap",
+				"title": "%codegeex.explorer.projectMap.title%",
+				"icon": "$(codegeex-dark)"
+			},
+			{
+				"command": "codegeex.projectMap.removeHistory",
+				"title": "CodeGeeX: Remove Project Map History"
+			},
+			{
+				"command": "codegeex.codelens.list",
+				"title": "CodeGeeX: CodeLens"
+			},
+			{
+				"command": "codegeex.codelens.disable",
+				"title": "CodeGeeX: Disable CodeLens"
+			},
+			{
+				"command": "codegeex.codelens.undo",
+				"title": "CodeGeeX: CodeLens Undo"
+			},
+			{
+				"command": "codegeex.codelens.done",
+				"title": "CodeGeeX: Done",
+				"enablement": "false"
+			},
+			{
+				"command": "codegeex.codelens.enable",
+				"title": "CodeGeeX: Enable CodeLens"
+			},
+			{
+				"command": "codegeex.codelens.addDocString",
+				"title": "CodeGeeX: Add Docstring"
+			},
+			{
+				"command": "codegeex.codelens.addDocStringForClass",
+				"title": "CodeGeeX: Add Docstring"
+			},
+			{
+				"command": "codegeex.codelens.addExceptionHandling",
+				"title": "CodeGeeX: Add Exception Handling"
+			},
+			{
+				"command": "codegeex.codelens.printLogForDebugging",
+				"title": "CodeGeeX: Print Log For Debugging"
+			},
+			{
+				"command": "codegeex.codelens.renameSymbols",
+				"title": "CodeGeeX: Rename Symbols",
+				"enablement": "false"
+			},
+			{
+				"command": "codegeex.codelens.debugInNewFile",
+				"title": "CodeGeeX: Debug In New File"
+			},
+			{
+				"command": "codegeex.codelens.addDocStringForMethods",
+				"title": "CodeGeeX: Add Docstring For Methods"
+			},
+			{
+				"command": "codegeex.ghostComment.accept",
+				"title": "CodeGeeX: Accept Ghost Comment"
+			},
+			{
+				"command": "codegeex.ghostComment.auto",
+				"title": "%codegeex.ghostComment.auto.title%"
+			},
+			{
+				"command": "codegeex.ghostComment.inAutoMode",
+				"title": "%codegeex.ghostComment.inAutoMode.title%"
+			},
+			{
+				"command": "codegeex.ghostComment.resetlastused",
+				"title": "CodeGeeX: Reset Last Used Cache",
+				"enablement": "codegeex.isDevMode"
+			},
+			{
+				"command": "codegeex.inlineChat.input",
+				"title": "CodeGeeX: Inline Chat Input",
+				"enablement": "!enableLocalMode"
+			},
+			{
+				"command": "codegeex.inlineChat.generate",
+				"title": "CodeGeeX: Inline Chat",
+				"enablement": "false"
+			},
+			{
+				"command": "codegeex.inlineChat.reask",
+				"title": "CodeGeeX: Regenerate",
+				"enablement": "false"
+			},
+			{
+				"command": "codegeex.inlineChat.terminate",
+				"title": "CodeGeeX: Inline Chat Terminate",
+				"enablement": "false"
+			},
+			{
+				"command": "codegeex.annotation.keybindings.disable",
+				"title": "CodeGeeX: Disable Inline Annotation",
+				"enablement": "false"
+			},
+			{
+				"command": "codegeex.editor.fileUML",
+				"enablement": "codegeex.enableFileUML",
+				"title": "%codegeex.editor.fileUML.title%"
+			},
+			{
+				"command": "codegeex.agent.stop",
+				"title": "CodeGeeX: Stop Generation",
+				"enablement": "!enableLocalMode"
+			},
+			{
+				"command": "codegeex.agent.debugChat",
+				"title": "CodeGeeX: Debug Mode Chat",
+				"enablement": "!enableLocalMode"
+			}
+		],
+		"viewsContainers": {
+			"activitybar": [
+				{
+					"id": "codegeex-sidebar",
+					"title": "CodeGeeX",
+					"icon": "./media/logo-codegeex.png"
+				}
+			]
+		},
+		"views": {
+			"codegeex-sidebar": [
+				{
+					"type": "webview",
+					"id": "codegeex-qa",
+					"name": ""
+				}
+			]
+		},
+		"configuration": [
+			{
+				"title": "%codegeex.language-preference.title%",
+				"order": 1,
+				"properties": {
+					"Codegeex.Comment.LanguagePreference": {
+						"title": "Comment Language Preference",
+						"type": "string",
+						"default": "Default",
+						"enum": [
+							"English",
+							"中文",
+							"Default"
+						],
+						"description": "%codegeex.comment.language-preference.description%"
+					},
+					"Codegeex.Chat.LanguagePreference": {
+						"type": "string",
+						"default": "Default",
+						"enum": [
+							"English",
+							"中文",
+							"Default"
+						],
+						"description": "%codegeex.chat.language-preference.description%"
+					},
+					"Codegeex.SidebarUI.LanguagePreference": {
+						"type": "string",
+						"default": "Default",
+						"enum": [
+							"English",
+							"中文",
+							"Default"
+						],
+						"description": "%codegeex.sidebarui.language-preference.description%"
+					}
+				}
+			},
+			{
+				"title": "Chat Setting",
+				"order": 1,
+				"properties": {
+					"Codegeex.Chat.fontSize": {
+						"title": "Chat Font Size",
+						"type": [
+							"number",
+							"null"
+						],
+						"default": null,
+						"minimum": 10,
+						"maximum": 30,
+						"description": "%codegeex.chat.fontsize.description%"
+					}
+				}
+			},
+			{
+				"title": "%codegeex.completion.setting.title%",
+				"order": 2,
+				"properties": {
+					"Codegeex.CompletionModel": {
+						"type": "string",
+						"default": "CodeGeeX Lite",
+						"description": "%codegeex.filling-model.description%",
+						"enum": [
+							"CodeGeeX Lite",
+							"CodeGeeX Pro[Beta]"
+						],
+						"enumDescriptions": [
+							"%codegeex.filling-model.lite.description%",
+							"%codegeex.filling-model.pro.description%"
+						]
+					},
+					"Codegeex.CandidateNum": {
+						"type": "string",
+						"enum": [
+							"%codegeex.candidate-num.fast%",
+							"%codegeex.candidate-num.medium%",
+							"%codegeex.candidate-num.slow%"
+						],
+						"default": "%codegeex.candidate-num.fast%",
+						"description": "%codegeex.candidate-num.description%"
+					},
+					"Codegeex.CompletionDelay": {
+						"type": "number",
+						"enum": [
+							0.1,
+							0.2,
+							0.3,
+							0.4,
+							0.5,
+							1,
+							2,
+							3
+						],
+						"default": 0.5,
+						"description": "%codegeex.completion-delay.description%"
+					},
+					"Codegeex.EnableExtension": {
+						"type": "boolean",
+						"default": true,
+						"description": "%codegeex.enable-extension.description%"
+					},
+					"Codegeex.DisabledFor": {
+						"type": "object",
+						"additionalProperties": "string",
+						"default": {},
+						"markdownDescription": "%codegeex.disable-for.description%"
+					},
+					"Codegeex.GenerationPreference": {
+						"type": "string",
+						"enum": [
+							"automatic",
+							"line by line",
+							"block"
+						],
+						"default": "automatic",
+						"description": "%codegeex.generation-preference.description%"
+					},
+					"Codegeex.OnlyKeyControl": {
+						"type": "boolean",
+						"default": null,
+						"description": "%codegeex.only-key-control.description%"
+					}
+				}
+			},
+			{
+				"title": "Commit Message",
+				"order": 3,
+				"properties": {
+					"Codegeex.CommitMessageStyle": {
+						"type": "string",
+						"enum": [
+							"Default",
+							"ConventionalCommits",
+							"Auto"
+						],
+						"enumItemLabels": [
+							"%codegeex.git.commit.style.default%",
+							"%codegeex.git.commit.style.conv%",
+							"%codegeex.git.commit.style.gitlog%"
+						],
+						"enumDescriptions": [
+							"%codegeex.git.commit.style.default.description%",
+							"%codegeex.git.commit.style.conv.description%",
+							"%codegeex.git.commit.style.gitlog.description%"
+						],
+						"default": "Auto",
+						"description": "%codegeex.git.commit.description%"
+					},
+					"Codegeex.CommitMessage.LanguagePreference": {
+						"type": "string",
+						"default": "Default",
+						"enum": [
+							"English",
+							"中文",
+							"Default"
+						],
+						"description": "%codegeex.git.commit.language.description%"
+					}
+				}
+			},
+			{
+				"title": "%codegeex.local-mode.title%",
+				"order": 4,
+				"properties": {
+					"Codegeex.Local": {
+						"scope": "application",
+						"markdownDescription": "%codegeex.local-mode.description%",
+						"default": {
+							"apiURL": "",
+							"useChatGLM": true,
+							"chatGLM": {
+								"apiKey": "",
+								"model": ""
+							},
+							"chat": {
+								"useDefaultSystemPrompt": true,
+								"systemPrompt": "",
+								"temperature": 0.2,
+								"top_p": 0.95,
+								"max_tokens": 1024,
+								"presence_penalty": 1
+							},
+							"completions": {
+								"useDefaultSystemPrompt": true,
+								"systemPrompt": "",
+								"temperature": 0.2,
+								"top_p": 0.95,
+								"max_tokens": 64,
+								"presence_penalty": 1
+							}
+						},
+						"type": "object",
+						"properties": {
+							"apiURL": {
+								"type": "string",
+								"markdownDescription": "%codegeex.local-mode.apiurl.description%"
+							},
+							"useChatGLM": {
+								"type": "boolean"
+							},
+							"chatGLM": {
+								"type": "object",
+								"description": "%codegeex.local-mode.chatglm.description%",
+								"properties": {
+									"apiKey": {
+										"type": "string",
+										"description": "%codegeex.local-mode.chatglm.apikey.description%"
+									},
+									"model": {
+										"type": "string",
+										"description": "%codegeex.local-mode.chatglm.model.description%"
+									}
+								}
+							},
+							"chat": {
+								"type": "object",
+								"description": "%codegeex.local-mode.chat.parameters.description%",
+								"properties": {
+									"useDefaultSystemPrompt": {
+										"type": "boolean",
+										"description": "%codegeex.local-mode.useDefaultSystemPrompt.description%"
+									},
+									"systemPrompt": {
+										"type": "string",
+										"description": "%codegeex.local-mode.systemPrompt.description%"
+									},
+									"temperature": {
+										"type": "number",
+										"description": "%codegeex.local-mode.temperature.description%",
+										"minimum": 0,
+										"maximum": 1
+									},
+									"top_p": {
+										"type": "number",
+										"description": "%codegeex.local-mode.top_p.description%",
+										"minimum": 0,
+										"maximum": 1
+									},
+									"max_tokens": {
+										"type": "number",
+										"minimum": 1,
+										"description": "%codegeex.local-mode.max_tokens.description%"
+									},
+									"presence_penalty": {
+										"type": "number",
+										"description": "%codegeex.local-mode.presence_penalty.description%",
+										"minimum": -2,
+										"maximum": 2
+									}
+								}
+							},
+							"completions": {
+								"type": "object",
+								"description": "%codegeex.local-mode.completions.parameters.description%",
+								"properties": {
+									"useDefaultSystemPrompt": {
+										"type": "boolean",
+										"description": "%codegeex.local-mode.useDefaultSystemPrompt.description%"
+									},
+									"systemPrompt": {
+										"type": "string",
+										"description": "%codegeex.local-mode.systemPrompt.description%"
+									},
+									"temperature": {
+										"type": "number",
+										"description": "%codegeex.local-mode.temperature.description%",
+										"minimum": 0,
+										"maximum": 1
+									},
+									"top_p": {
+										"type": "number",
+										"description": "%codegeex.local-mode.top_p.description%",
+										"minimum": 0,
+										"maximum": 1
+									},
+									"max_tokens": {
+										"type": "number",
+										"minimum": 1,
+										"description": "%codegeex.local-mode.max_tokens.description%"
+									},
+									"presence_penalty": {
+										"type": "number",
+										"description": "%codegeex.local-mode.presence_penalty.description%",
+										"minimum": -2,
+										"maximum": 2
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			{
+				"title": "%codegeex.workspace.setting.title%",
+				"order": 5,
+				"properties": {
+					"Codegeex.RepoIndex": {
+						"type": "boolean",
+						"markdownDescription": "%codegeex.workspace.setting.description%",
+						"default": false,
+						"enum": [
+							false,
+							true
+						],
+						"enumItemLabels": [
+							"%codegeex.workspace.setting.disable%",
+							"%codegeex.workspace.setting.enable%"
+						]
+					}
+				}
+			},
+			{
+				"title": "%codegeex.authorization.title%",
+				"order": 6,
+				"properties": {
+					"Codegeex.License": {
+						"scope": "application",
+						"title": "%codegeex.authorization.license.title%",
+						"type": "string",
+						"description": "%codegeex.authorization.license.description%",
+						"default": "",
+						"pattern": "^(?:[a-zA-Z0-9]+-[a-zA-Z0-9]+)?$",
+						"patternErrorMessage": "%codegeex.authorization.license.patternErrorMessage%"
+					}
+				}
+			},
+			{
+				"title": "%codegeex.codelens.configuration.title%",
+				"order": 7,
+				"properties": {
+					"codegeex.codeLens.enableCodeLens": {
+						"title": "%codegeex.codelens.configuration.enable.description%",
+						"scope": "application",
+						"order": 11,
+						"type": "string",
+						"enum": [
+							"enable",
+							"hide_x",
+							"disable"
+						],
+						"default": "enable",
+						"enumItemLabels": [
+							"%codegeex.codelens.configuration.enable%",
+							"%codegeex.codelens.configuration.hide_x%",
+							"%codegeex.codelens.configuration.disable%"
+						],
+						"enumDescriptions": [
+							"%codegeex.codelens.configuration.enable.description%",
+							"%codegeex.codelens.configuration.hide_x.description%",
+							"%codegeex.codelens.configuration.disable.description%"
+						]
+					},
+					"codegeex.codeLens.functionQuickOptions": {
+						"type": "object",
+						"order": 12,
+						"default": {
+							"explainCode": true,
+							"addComment": true
+						},
+						"scope": "application",
+						"description": "%codegeex.codelens.configuration.function.description%",
+						"properties": {
+							"explainCode": {
+								"type": "boolean",
+								"description": "%codegeex.codelens.configuration.explainCode%"
+							},
+							"addComment": {
+								"type": "boolean",
+								"description": "%codegeex.codelens.configuration.addComment%"
+							},
+							"ghostComment": {
+								"type": "boolean",
+								"description": "%codegeex.codelens.configuration.ghostComment%"
+							},
+							"fixBug": {
+								"type": "boolean",
+								"description": "%codegeex.codelens.configuration.fixBug%"
+							},
+							"generateUnitTest": {
+								"type": "boolean",
+								"description": "%codegeex.codelens.configuration.generateUnitTest%"
+							},
+							"reviewCode": {
+								"type": "boolean",
+								"description": "%codegeex.codelens.configuration.reviewCode%"
+							},
+							"codeOptimization": {
+								"type": "boolean",
+								"description": "%codegeex.codelens.configuration.codeOptimization%"
+							},
+							"addDocString": {
+								"type": "boolean",
+								"description": "%codegeex.codelens.configuration.addDocString%"
+							},
+							"addExceptionHandling": {
+								"type": "boolean",
+								"description": "%codegeex.codelens.configuration.addExceptionHandling%"
+							},
+							"printLogForDebugging": {
+								"type": "boolean",
+								"description": "%codegeex.codelens.configuration.printLogForDebugging%"
+							},
+							"improveRunningEfficiency": {
+								"type": "boolean",
+								"description": "%codegeex.codelens.configuration.improveRunningEfficiency%"
+							},
+							"renameSymbols": {
+								"type": "boolean",
+								"description": "%codegeex.codelens.configuration.renameSymbols%"
+							},
+							"newFileForDebugging": {
+								"type": "boolean",
+								"description": "%codegeex.codelens.configuration.newFileForDebugging%"
+							},
+							"tryANewApproach": {
+								"type": "boolean",
+								"description": "%codegeex.codelens.configuration.tryANewApproach%"
+							}
+						},
+						"additionalProperties": false
+					},
+					"codegeex.codeLens.classQuickOptions": {
+						"type": "object",
+						"default": {
+							"explainCode": true,
+							"addComment": true
+						},
+						"order": 13,
+						"scope": "application",
+						"description": "%codegeex.codelens.configuration.class.description%",
+						"properties": {
+							"explainCode": {
+								"type": "boolean",
+								"description": "%codegeex.codelens.configuration.explainCode%"
+							},
+							"addComment": {
+								"type": "boolean",
+								"description": "%codegeex.codelens.configuration.addComment%"
+							},
+							"ghostComment": {
+								"type": "boolean",
+								"description": "%codegeex.codelens.configuration.ghostComment%"
+							},
+							"fixBug": {
+								"type": "boolean",
+								"description": "%codegeex.codelens.configuration.fixBug%"
+							},
+							"generateUnitTest": {
+								"type": "boolean",
+								"description": "%codegeex.codelens.configuration.generateUnitTest%"
+							},
+							"reviewCode": {
+								"type": "boolean",
+								"description": "%codegeex.codelens.configuration.reviewCode%"
+							},
+							"addDocStringForClass": {
+								"type": "boolean",
+								"description": "%codegeex.codelens.configuration.addDocStringForClass%"
+							},
+							"addDocStringForMethods": {
+								"type": "boolean",
+								"description": "%codegeex.codelens.configuration.addDocstringForMethods%"
+							}
+						},
+						"additionalProperties": false
+					}
+				}
+			},
+			{
+				"title": "Privacy",
+				"order": 99,
+				"properties": {
+					"Codegeex.Privacy": {
+						"type": "boolean",
+						"description": "%codegeex.privacy.description%",
+						"default": null
+					}
+				}
+			}
+		],
+		"keybindings": [
+			{
+				"command": "codegeex.new-completions",
+				"key": "Alt+\\",
+				"when": "editorFocus && !editorReadonly"
+			},
+			{
+				"command": "codegeex.translate-mode",
+				"key": "Alt+ctrl+T",
+				"when": "editorFocus && !editorReadonly"
+			},
+			{
+				"command": "editor.action.inlineSuggest.commit",
+				"key": "Tab",
+				"when": "inlineSuggestionHasIndentationLessThanTabSize && inlineSuggestionVisible && !editorHoverFocused && !editorTabMovesFocus && editorFocus &&!editorReadonly"
+			},
+			{
+				"command": "editor.action.inlineSuggest.acceptNextLine",
+				"mac": "Cmd+down",
+				"key": "ctrl+down",
+				"when": "inlineSuggestionVisible && !editorHoverFocused && !editorTabMovesFocus && editorFocus &&!editorReadonly"
+			},
+			{
+				"command": "codegeex.chat.toggle",
+				"key": "alt+y",
+				"mac": "cmd+y"
+			},
+			{
+				"command": "codegeex.ghostComment.accept",
+				"key": "ctrl+right",
+				"mac": "cmd+right",
+				"when": "!inlineSuggestionVisible && !editorReadonly && !codegeex.enableLocalMode && codegeex.enablecmd+right"
+			},
+			{
+				"command": "codegeex.ghostComment",
+				"key": "Alt+A",
+				"when": "!codegeex.enableLocalMode"
+			},
+			{
+				"command": "codegeex.inlineChat.input",
+				"key": "ctrl+i",
+				"mac": "cmd+i",
+				"when": "editorFocus && !editorReadonly && !codegeex.enableLocalMode"
+			},
+			{
+				"command": "codegeex.toolbar.add",
+				"key": "ctrl+n",
+				"mac": "cmd+n",
+				"when": "view.codegeex-qa.visible && ((codegeex.navTab === 'chat' && codegeex.chatInputFocus) || (codegeex.navTab === 'agent' && codegeex.agentInputFocus) || (codegeex.navTab === 'toolbox' && codegeex.toolboxInputFocus))"
+			},
+			{
+				"command": "codegeex.agent.stop",
+				"key": "ctrl+shift+backspace",
+				"mac": "cmd+shift+backspace",
+				"when": "!codegeex.enableLocalMode"
+			},
+			{
+				"command": "codegeex.agent.debugChat",
+				"key": "ctrl+enter",
+				"mac": "cmd+enter",
+				"when": "!editorFocus && !codegeex.enableLocalMode"
+			}
+		],
+		"menus": {
+			"editor/context": [
+				{
+					"submenu": "codegeex.tool",
+					"group": "navigation"
+				}
+			],
+			"codegeex.tool": [
+				{
+					"command": "codegeex.askcodegeex",
+					"when": "editorFocus && !editorReadonly",
+					"group": "codegeex.tool@1"
+				},
+				{
+					"command": "codegeex.askcodegeex.explain",
+					"when": "editorFocus && !editorReadonly",
+					"group": "codegeex.tool@2"
+				},
+				{
+					"command": "codegeex.askcodegeex.comment",
+					"when": "editorFocus && !editorReadonly",
+					"group": "codegeex.tool@3"
+				},
+				{
+					"command": "codegeex.ghostComment",
+					"when": "editorFocus && !editorReadonly && !codegeex.enableLocalMode",
+					"group": "codegeex.tool@4"
+				},
+				{
+					"command": "codegeex.ghostComment.auto",
+					"when": "!codegeex.inGhostCommentAutoMode && !editorReadonly && !codegeex.enableLocalMode",
+					"group": "codegeex.tool@5"
+				},
+				{
+					"command": "codegeex.ghostComment.inAutoMode",
+					"when": "codegeex.inGhostCommentAutoMode && !codegeex.enableLocalMode",
+					"group": "codegeex.tool@5"
+				},
+				{
+					"command": "codegeex.askcodegeex.tests",
+					"when": "editorFocus && !editorReadonly",
+					"group": "codegeex.tool@6"
+				},
+				{
+					"command": "codegeex.askcodegeex.scanCode",
+					"when": "editorFocus && !codegeex.enableLocalMode && codegeex.canScan",
+					"group": "codegeex.tool@7"
+				},
+				{
+					"command": "codegeex.ghostComment.hide",
+					"when": "editorFocus && !editorReadonly && codegeex.enableHideGhostComment",
+					"group": "navigation@1"
+				},
+				{
+					"command": "codegeex.explorer.projectMap",
+					"when": "editorFocus && !editorReadonly && !codegeex.enableLocalMode && codegeex.inWorkspace",
+					"group": "group@1"
+				},
+				{
+					"command": "codegeex.editor.fileUML",
+					"when": "editorFocus && !editorReadonly && !codegeex.enableLocalMode && codegeex.enableFileUML && codegeex.inWorkspace",
+					"group": "group@2"
+				}
+			],
+			"editor/title": [
+				{
+					"command": "codegeex.review",
+					"group": "navigation",
+					"when": "isInDiffEditor && !codegeex.enableLocalMode"
+				}
+			],
+			"scm/title": [
+				{
+					"when": "scmProvider == git && !codegeex.enableLocalMode",
+					"command": "codegeex.commit.message",
+					"group": "navigation"
+				}
+			],
+			"view/title": [
+				{
+					"command": "codegeex.toolbar.add",
+					"group": "navigation@1",
+					"when": "view === codegeex-qa"
+				},
+				{
+					"command": "codegeex.toolbar.split",
+					"group": "navigation@2",
+					"when": "view === codegeex-qa"
+				},
+				{
+					"command": "codegeex.toolbar.delete",
+					"group": "navigation@3",
+					"when": "codegeex.enableDelete &&codegeex.loggedIn && !codegeex.enableLocalMode && view === codegeex-qa && (codegeex.navTab === 'chat' || codegeex.navTab === 'agent')"
+				},
+				{
+					"command": "codegeex.toolbar.history",
+					"group": "navigation@4",
+					"when": "view === codegeex-qa"
+				},
+				{
+					"group": "navigation@5",
+					"when": "view === codegeex-qa",
+					"submenu": "codegeex.toolbar.more.submenu"
+				},
+				{
+					"command": "codegeex.explorer.projectMap",
+					"group": "navigation",
+					"when": "view=== workbench.explorer.fileView && !codegeex.enableLocalMode"
+				}
+			],
+			"codegeex.toolbar.more.submenu": [
+				{
+					"command": "codegeex.toolbar.more.newTab",
+					"group": "navigation@1",
+					"id": "codegeex.toolbar.more.newTab"
+				},
+				{
+					"command": "codegeex.toolbar.more.localMode",
+					"group": "navigation@2",
+					"id": "codegeex.toolbar.more.localMode",
+					"when": "!codegeex.enableLocalMode"
+				},
+				{
+					"command": "codegeex.toolbar.more.onlineMode",
+					"group": "navigation@3",
+					"id": "codegeex.toolbar.more.onlineMode",
+					"when": "codegeex.enableLocalMode"
+				},
+				{
+					"command": "codegeex.toolbar.more.toolbox",
+					"group": "navigation@4",
+					"id": "codegeex.toolbar.more.toolbox",
+					"when": "!codegeex.enableLocalMode"
+				},
+				{
+					"command": "codegeex.toolbar.more.settings",
+					"group": "navigation@5",
+					"id": "codegeex.toolbar.more.settings"
+				},
+				{
+					"command": "codegeex.toolbar.more.help",
+					"group": "navigation@6",
+					"id": "codegeex.toolbar.more.help"
+				},
+				{
+					"command": "codegeex.toolbar.more.feedback",
+					"group": "navigation@7",
+					"id": "codegeex.toolbar.more.feedback"
+				}
+			],
+			"terminal/context": [
+				{
+					"command": "codegeex.terminal.ask"
+				}
+			]
+		},
+		"submenus": [
+			{
+				"id": "codegeex.tool",
+				"label": "CodeGeeX"
+			},
+			{
+				"id": "codegeex.toolbar.more.submenu",
+				"label": "CodeGeeX",
+				"icon": "$(more)"
+			}
+		],
+		"icons": {
+			"codegeex-dark": {
+				"description": "CodeGeeX icon",
+				"default": {
+					"fontPath": "./media/codegeex.woff",
+					"fontCharacter": "\\E001"
+				}
+			},
+			"codegeex-tab": {
+				"description": "CodeGeeX tab",
+				"default": {
+					"fontPath": "./media/tabs.woff",
+					"fontCharacter": "\\e901"
+				}
+			}
+		}
+	},
+	"scripts": {
+		"submodules:install": "cd webview-ui && npm i && cd ../welcome-page && npm i &&cd ../project-map && npm i",
+		"submodules:gitpull": "cd webview-ui && git pull & cd ../welcome-page && git pull &&cd ../project-map && git pull",
+		"vscode:prepublish": "cd webview-ui && npm run build && cd ../welcome-page && npm run build &&cd ../project-map && npm run build && cd ../ && npm run build && npm run compile:agent",
+		"compile": "webpack --mode development",
+		"compile:agent": "cd agent && cd ../scripts/agent && node obfuscate.js",
+		"watch": "webpack --mode development --watch",
+		"watch:webview": "cd webview-ui && npm run dev:vscode",
+		"compile-tests": "tsc -p . --outDir out",
+		"watch-tests": "tsc -p . -w --outDir out",
+		"pretest": "npm run compile && npm run lint",
+		"lint": "eslint src --ext ts",
+		"test": "node ./out/test/runTest.js",
+		"jest": "jest",
+		"vitest": "vitest",
+		"build": "webpack --mode $MODE --devtool hidden-source-map",
+		"package": "NODE_ENV=$MODE vsce package --allow-star-activation --baseImagesUrl=https://lfs.aminer.cn/misc/wangshan/pretrain/codegeex/ && NODE_ENV=$MODE node scripts/postbuild.js",
+		"package:dev": "PLATFORM=vscode MODE=development npm run package",
+		"package:prod": "PLATFORM=vscode MODE=production npm run package",
+		"package:prod:log": "LOGGER=true PLATFORM=vscode MODE=production npm run package",
+		"package:prerelease": "NODE_ENV=$MODE vsce package  --pre-release --allow-star-activation --baseImagesUrl=https://lfs.aminer.cn/misc/wangshan/pretrain/codegeex/ && NODE_ENV=$MODE node scripts/postbuild.js",
+		"package:prerelease:prod": "PLATFORM=vscode MODE=production npm run package:prerelease",
+		"all-in-one:package:prod": "TARGET=all-in-one. npm run package:prod",
+		"package:platforms": "node scripts/package-platforms.js",
+		"package:platforms:dev": "node scripts/package-platforms.js mode=development",
+		"package:platforms:prod": "node scripts/package-platforms.js mode=production",
+		"package:platforms:prerelease:prod": "node scripts/package-platforms.js mode=production prerelease=true",
+		"package:platform": "node scripts/package-platforms.js",
+		"package:platform:dev": "node scripts/package-platforms.js mode=development",
+		"package:platform:prod": "node scripts/package-platforms.js mode=production",
+		"package:universal": "node scripts/package-platforms.js platform=universal",
+		"publish:platforms": "node scripts/publish-platforms.js",
+		"publish:prerelease:platforms": "node scripts/publish-platforms.js prerelease=true",
+		"vscode:uninstall": "node ./dist/uninstall.js"
+	},
+	"devDependencies": {
+		"@sentry/webpack-plugin": "^2.14.2",
+		"@types/diff": "^5.2.0",
+		"@types/glob": "^7.2.0",
+		"@types/ip": "^1.1.3",
+		"@types/jest": "^29.5.12",
+		"@types/js-yaml": "^4.0.9",
+		"@types/lodash": "^4.17.4",
+		"@types/mocha": "^9.1.1",
+		"@types/node": "~20.14.2",
+		"@types/opn": "^5.5.0",
+		"@types/uuid": "^9.0.0",
+		"@types/vscode": "1.81",
+		"@typescript-eslint/eslint-plugin": "^5.31.0",
+		"@typescript-eslint/parser": "^5.31.0",
+		"@vscode/l10n-dev": "^0.0.29",
+		"@vscode/test-electron": "^2.1.5",
+		"copy-webpack-plugin": "^11.0.0",
+		"eslint": "^8.20.0",
+		"glob": "^8.0.3",
+		"jest": "^29.7.0",
+		"jest-environment-jsdom": "^29.7.0",
+		"mocha": "^10.0.0",
+		"ora": "^5.4.1",
+		"terser-webpack-plugin": "^5.3.9",
+		"ts-jest": "^29.1.1",
+		"ts-loader": "^9.5.1",
+		"typescript": "^4.9.5",
+		"vitest": "^1.6.1",
+		"webpack": "^5.89.0",
+		"webpack-cli": "^5.1.4"
+	},
+	"dependencies": {
+		"@agnai/sentencepiece-js": "^1.1.1",
+		"@opentelemetry/api": "^1.8.0",
+		"@opentelemetry/core": "^1.24.1",
+		"@opentelemetry/exporter-trace-otlp-http": "^0.51.1",
+		"@opentelemetry/resources": "^1.24.1",
+		"@opentelemetry/sdk-trace-base": "^1.24.1",
+		"@opentelemetry/sdk-trace-node": "^1.24.1",
+		"@opentelemetry/semantic-conventions": "^1.24.1",
+		"@sentry/integrations": "^7.102.1",
+		"@sentry/node": "^7.99.0",
+		"@types/git-diff": "^2.0.7",
+		"@vscode/l10n": "^0.0.10",
+		"@vscode/vsce": "^2.19.0",
+		"@vscode/webview-ui-toolkit": "^1.2.0",
+		"axios": "^1.7.3",
+		"diff": "^8.0.2",
+		"fastest-levenshtein": "^1.0.16",
+		"find-process": "github:jues/find-process",
+		"form-data": "^4.0.0",
+		"fuse.js": "^7.1.0",
+		"get-port": "^7.1.0",
+		"git-diff": "^2.0.6",
+		"git-last-commit": "^1.0.1",
+		"i18next": "^23.5.1",
+		"ignore": "^5.3.1",
+		"js-yaml": "^4.1.0",
+		"lodash": "^4.17.21",
+		"open": "^10.1.0",
+		"p-wait-for": "^5.0.2",
+		"pkcs7": "^1.0.4",
+		"react-i18next": "^13.2.2",
+		"strip-ansi": "^7.1.0",
+		"uuid": "^9.0.0",
+		"web-tree-sitter": "^0.20.8"
+	},
+	"packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e",
+	"__metadata": {
+		"installedTimestamp": 1763709721819,
+		"targetPlatform": "darwin-arm64",
+		"size": 118942689
+	}
+}

@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=64.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "codegeex_mcp_tools"
+version = "0.2.0"
+description = "CodeGeeX MCP Tools - Tools for Model Control Protocol"
+authors = [
+    { name = "CodeGeeX Team", email = "codegeex@example.com" },
+]
+readme = "README.md"
+requires-python = ">=3.7"
+dependencies = [
+    "requests>=2.25.1",
+    "fastapi>=0.68.0",
+    "uvicorn>=0.15.0",
+    "python-multipart>=0.0.5",
+    "aiohttp>=3.8.0",
+]
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]

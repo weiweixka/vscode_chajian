@@ -1,0 +1,5 @@
+#!/bin/sh
+PATH=$PATH:/usr/local/bin:/usr/local/sbin:/opt/homebrew/bin
+. "$(dirname "$0")/_/husky.sh"
+
+yarn lint-staged --allow-empty "$1"

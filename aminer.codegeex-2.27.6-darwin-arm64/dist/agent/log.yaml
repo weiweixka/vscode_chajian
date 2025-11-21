@@ -1,0 +1,62 @@
+version: 1
+formatters:
+  base:
+    format: '[%(levelname)s] %(asctime)s - %(filename)s:%(lineno)d - %(message)s'
+  colored:
+    class: colorlog.ColoredFormatter
+    format: '%(reset)s%(log_color)s[%(levelname)s]%(reset)s %(asctime)s - %(filename)s:%(lineno)d - %(reset)s%(blue)s%(message)s%(reset)s'
+    log_colors:
+      DEBUG: cyan
+      INFO: green
+      WARNING: yellow
+      ERROR: red
+      CRITICAL: bold_red
+handlers:
+  console:
+    class: logging.StreamHandler
+    level: INFO
+    formatter: colored
+    stream: ext://sys.stdout
+  inferene_file:
+    class: logging.handlers.TimedRotatingFileHandler
+    level: INFO
+    formatter: base
+    filename: logs/inference/run.log
+    when: midnight
+    delay: True
+    backupCount: 3
+    encoding: utf8
+  info_file:
+    class: logging.handlers.TimedRotatingFileHandler
+    level: INFO
+    formatter: base
+    filename: logs/info/run.log
+    when: midnight
+    delay: True
+    backupCount: 3
+    encoding: utf8
+  error_file:
+    class: logging.handlers.TimedRotatingFileHandler
+    level: ERROR
+    formatter: base
+    filename: logs/error/errors.log
+    when: midnight
+    delay: True
+    backupCount: 3
+    encoding: utf8
+loggers:
+  my_logger:
+    level: INFO
+    handlers: [ console, info_file, error_file ]
+    propagate: no
+  inference:
+    level: INFO
+    handlers: [ inferene_file ]
+    propagate: no
+  uvicorn.error:
+    level: INFO
+    handlers: [ console ]
+    propagate: no
+root:
+  level: INFO
+  handlers: [ console, info_file, error_file ]
